@@ -30,7 +30,21 @@
                 <td>
                     <a href="{{ route('posts.show',[$post['id']])}}" class="btn btn-primary">View</a>
                     <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-success">Edit</a>
-                    <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a>
+
+                    <a href="posts/{{$post->id}}" class="btn btn-danger" onclick="
+                      var result = confirm('Are you sure you want to delete this record?');
+                
+                      if(result){
+                        event.preventDefault();
+                        document.getElementById('delete-form-{{$post->id}}').submit();
+                        }"> Delete
+                   </a>
+                  <form method="POST" id="delete-form-{{$post->id}}" action="{{route('posts.destroy', [$post->id])}}">
+                      {{csrf_field()}}
+                      <input type="hidden" name="_method" value="DELETE">
+                  </form>
+
+                    <!-- <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a> -->
                 </td>
               </tr>
               @endforeach
