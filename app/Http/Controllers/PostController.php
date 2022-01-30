@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -58,6 +59,12 @@ class PostController extends Controller
     }
 
     public function update($id){
+        $data = request()->all();
+        DB::table('posts')->where('id',$id)->update([
+            'title'=>$data['title'],
+            'description'=>$data['description'],
+        ]);
+        
         return redirect()->route('posts.index');
 
     }
