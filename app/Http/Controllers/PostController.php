@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -12,9 +13,13 @@ class PostController extends Controller
     public function index()
     {
         $allPosts = Post::all();
-
+        $pagination=Post::select('id')->paginate();
+        $carbon= new Carbon();
         return view('posts.index', [
-            'allPosts' => $allPosts
+            'allPosts' => $allPosts,
+            'pagination'=>$pagination,
+            'carbon'=>$carbon,
+
         ]);
     }
 

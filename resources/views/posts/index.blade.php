@@ -26,7 +26,7 @@
                 <td>{{ $post->title }}</td>
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
                 {{-- @dd($post->created_at) carbon object --}}
-                <td>{{ $post->created_at }}</td>
+                <td>{{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d')}}</td>
                 <td>
                     <a href="{{ route('posts.show',[$post['id']])}}" class="btn btn-primary">View</a>
                     <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-success">Edit</a>
@@ -50,6 +50,9 @@
               @endforeach
             </tbody>
           </table>
+          @foreach ($pagination as $item)
+         
+          @endforeach
 
 @endsection
     

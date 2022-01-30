@@ -5,7 +5,7 @@
 @section('content')
 @foreach ($post as $item)
 
-
+<br><br>
 <form method="POST" action="{{route('posts.update',$item->id)}}">
 
 @csrf  
@@ -30,4 +30,5 @@
             
             <button  class="btn btn-success">Update Post</button>
         </form>
+        <br><br><br><hr> <br><br><br>
 @endsection

@@ -3,6 +3,7 @@
 @section('title') Create @endsection
 
 @section('content')
+        <br><br>
         <form method="POST" action="{{ route('posts.store') }}">
             @csrf
             <div class="mb-3">
@@ -26,5 +27,6 @@
             
             <button class="btn btn-success">Create Post</button>
         </form>
+        <br><br><br><hr> <br><br><br>
 @endsection
     
