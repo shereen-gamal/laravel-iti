@@ -13,12 +13,13 @@ class PostController extends Controller
     public function index()
     {
         $allPosts = Post::all();
-        $pagination=Post::select('id')->paginate();
+        
+        
         $carbon= new Carbon();
         return view('posts.index', [
-            'allPosts' => $allPosts,
-            'pagination'=>$pagination,
-            'carbon'=>$carbon,
+            // 'allPosts' => $allPosts,
+            'allPosts' => DB::table('posts')->paginate(8)
+           
 
         ]);
     }

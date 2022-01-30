@@ -28,8 +28,9 @@
                 {{-- @dd($post->created_at) carbon object --}}
                 <td>{{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d')}}</td>
                 <td>
-                    <a href="{{ route('posts.show',[$post['id']])}}" class="btn btn-primary">View</a>
-                    <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-success">Edit</a>
+                 
+                    <a href="{{ route('posts.show',[$post->id])}}" class="btn btn-primary">View</a>
+                    <a href="{{ route('posts.edit',[$post->id])}}" class="btn btn-success">Edit</a>
 
                     <a href="posts/{{$post->id}}" class="btn btn-danger" onclick="
                       var result = confirm('Are you sure you want to delete this record?');
@@ -44,15 +45,14 @@
                       <input type="hidden" name="_method" value="DELETE">
                   </form>
 
-                    <!-- <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a> -->
+                    <!-- <a href="{{ route('posts.destroy',[$post->id])}}" class="btn btn-danger">Delete</a> -->
                 </td>
               </tr>
               @endforeach
             </tbody>
           </table>
-          @foreach ($pagination as $item)
-         
-          @endforeach
 
+ {{ $allPosts->links() }}
+ 
 @endsection
     
