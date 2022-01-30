@@ -42,7 +42,8 @@ class PostController extends Controller
 
     }
 
-    public function update(){
+    public function update($id){
+        return redirect()->route('posts.index');
 
     }
 }
