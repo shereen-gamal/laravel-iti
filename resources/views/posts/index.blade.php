@@ -20,13 +20,13 @@
             <tbody>
              @foreach ($allPosts as $post)
               <tr>
-                <th scope="row">1</th>
+                <th scope="row">{{$post['id']}}</th>
                 <td>{{ $post['title'] }}</td>
                 <td>{{ $post['posted_by'] }}</td>
                 <td>{{ $post['created_at'] }}</td>
                 <td>
-                    <a href="#" class="btn btn-primary">View</a>
-                    <a href="#" class="btn btn-success">Edit</a>
+                    <a href="{{ route('posts.show',[$post['id']])}}" class="btn btn-primary">View</a>
+                    <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-success">Edit</a>
                     <a href="#" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
