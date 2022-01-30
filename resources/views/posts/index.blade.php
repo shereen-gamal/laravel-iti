@@ -34,11 +34,5 @@
             </tbody>
           </table>
 
-
-          <x-Button type="danger">custom Delete </x-Button>
-          <x-Button type="primary">custom Create </x-Button>
-          <x-Button type="success">custom Update </x-Button>
-
-
 @endsection
     
