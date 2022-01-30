@@ -27,11 +27,18 @@
                 <td>
                     <a href="{{ route('posts.show',[$post['id']])}}" class="btn btn-primary">View</a>
                     <a href="{{ route('posts.edit',[$post['id']])}}" class="btn btn-success">Edit</a>
-                    <a href="{{ route('posts.delete',[$post['id']])}}" class="btn btn-danger">Delete</a>
+                    <a href="{{ route('posts.destroy',[$post['id']])}}" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
               @endforeach
             </tbody>
           </table>
+
+
+          <x-Button type="danger">custom Delete </x-Button>
+          <x-Button type="primary">custom Create </x-Button>
+          <x-Button type="success">custom Update </x-Button>
+
+
 @endsection
     
