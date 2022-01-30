@@ -29,7 +29,7 @@ class PostController extends Controller
     public function store()
     {
         $data = request()->all();
-        
+
         Post::create([
             'title' => $data['title'],
             'description' => $data['description'],
@@ -42,8 +42,11 @@ class PostController extends Controller
 
     public function show($postId)
     {
+        $post = Post::all()->where('id',$postId);
         //query in db select * from posts where id = $postId
-        return view('posts.show');
+        return view('posts.show',[
+            'post' => $post
+        ]);
     }
 
     public function edit($id){

@@ -8,12 +8,13 @@
   <div class="card-header">
     Post Info
   </div>
+ @foreach ($post as $item)
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p><b>Title:</b>Static title</p>
-      <p><b>Description:</b>Static description</p>
+      <p><b>Title:</b> {{$item->title}}</p>
+      <p><b>Description:</b> {{$item->description}}</p>
     </blockquote>
-  </div>
+  </div>  
 </div>
 <br>
 <hr>
@@ -24,12 +25,13 @@
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <p><b>Name:</b>Static name</p>
-      <p><b>Email:</b>Static email</p>
-      <p><b>Created At:</b>Static date and time</p>
-
+      <p><b>Name:</b> {{$item->user->name}}</p>
+      <p><b>Email:</b> {{$item->user->email}}</p>
+      <p><b>Created At:</b> {{$item->created_at}}</p>
     </blockquote>
+    @endforeach
   </div>
 </div>
+
 
 @endsection

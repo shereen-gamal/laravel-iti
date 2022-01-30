@@ -18,8 +18,10 @@
               </tr>
             </thead>
             <tbody>
+
              @foreach ($allPosts as $post)
               <tr>
+              @dd($allPosts, $post)
               <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
