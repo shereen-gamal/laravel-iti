@@ -24,6 +24,6 @@
                 </select>
             </div>
             
-            <button class="btn btn-success">Update Post</button>
+            <button  class="btn btn-success">Update Post</button>
         </form>
 @endsection
