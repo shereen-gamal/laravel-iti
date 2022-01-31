@@ -9,6 +9,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 class PostController extends Controller
 {
     public function index()
@@ -62,8 +65,15 @@ class PostController extends Controller
 
     }
 
-    public function update($id, StorePostRequest $request){
-        $data = $request->all();
+    public function update($id){
+      
+        $data = request()->all();
+        Validator::make($data,[
+            'title' => ['required', 'min:3'],
+            'description' => ['required', 'min:10'],
+            
+        ])->validate();
+           
         $post = new Post();
         $post->where('id',$id)->update([
             'title'=>$data['title'],
