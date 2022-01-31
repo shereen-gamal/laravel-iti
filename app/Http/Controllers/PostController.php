@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -43,6 +43,7 @@ class PostController extends Controller
             'title' => $data['title'],
             'description' => $data['description'],
             'user_id' => $data['post_creator'],
+            'slug'=>Str::slug($data['title'],'-'),
           
         ]);
         return redirect()->route('posts.index');

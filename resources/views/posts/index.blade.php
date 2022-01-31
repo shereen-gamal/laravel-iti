@@ -14,6 +14,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Posted By</th>
                 <th scope="col">Created At</th>
+                <th scope="col">title-slug</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -26,6 +27,7 @@
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
                 {{-- @dd($post->created_at) carbon object --}}
                 <td>{{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d')}}</td>
+                <td>{{$post->slug}}</td>
                 <td>
                  
                     <a href="{{ route('posts.show',[$post->id])}}" class="btn btn-primary">View</a>
