@@ -28,9 +28,13 @@
             </div>
           </nav>
     </div>
+    
+ 
+
     <div class="container mt-5">
         @yield('content')
     </div>
+
     <footer class="bg-dark text-center text-white">
   <!-- Grid container -->
   <div class="container p-4 pb-0">

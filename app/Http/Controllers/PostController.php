@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
@@ -12,20 +13,12 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = Post::all();
-        $names=[];
-
-        foreach($allPosts as $post){
-
-            array_push($names, $post->user->name);
-            
-        }
-        
+        $post = new Post();
 
         $carbon= new Carbon();
         return view('posts.index', [
             // 'allPosts' => $allPosts,
-            'allPosts' => DB::table('posts')->paginate(6),
+            'allPosts' => $post->paginate(6),
             
         ]);
     }
@@ -39,10 +32,9 @@ class PostController extends Controller
         ]);
     }
 
-    public function store()
+    public function store(StorePostRequest $request)
     {
-        $data = request()->all();
-
+        $data = $request->all();
         Post::create([
             'title' => $data['title'],
             'description' => $data['description'],
@@ -70,9 +62,10 @@ class PostController extends Controller
 
     }
 
-    public function update($id){
-        $data = request()->all();
-        DB::table('posts')->where('id',$id)->update([
+    public function update($id, StorePostRequest $request){
+        $data = $request->all();
+        $post = new Post();
+        $post->where('id',$id)->update([
             'title'=>$data['title'],
             'description'=>$data['description'],
         ]);
