@@ -21,7 +21,7 @@
 
              @foreach ($allPosts as $post)
               <tr>
-              
+            
               <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
                 <td>{{ isset($post->user) ? $post->user->name : 'Not Found' }}</td>
@@ -53,6 +53,8 @@
           </table>
 
  {{ $allPosts->links() }}
- 
+
+
+ <br><br><hr><br>
 @endsection
     

@@ -13,14 +13,20 @@ class PostController extends Controller
     public function index()
     {
         $allPosts = Post::all();
+        $names=[];
+
+        foreach($allPosts as $post){
+
+            array_push($names, $post->user->name);
+            
+        }
         
-        
+
         $carbon= new Carbon();
         return view('posts.index', [
             // 'allPosts' => $allPosts,
-            'allPosts' => DB::table('posts')->paginate(8)
-           
-
+            'allPosts' => DB::table('posts')->paginate(6),
+            
         ]);
     }
 
