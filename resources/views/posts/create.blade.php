@@ -15,11 +15,11 @@
                     </ul>
                 </div>
             @endif
-            @yield('content')
 </main>
 
         <br><br>
-        <form method="POST" action="{{ route('posts.store') }}">
+    <div class="contianer m-3">
+        <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Title</label>
@@ -29,6 +29,11 @@
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>  
+            </div>
+
+            <div class="mb-3">
+                <label for="photo" class="form-label">Pic</label>
+                <input name="photo" type="file" class="form-control" id="photo">
             </div>
 
             <div class="mb-3">
@@ -42,6 +47,7 @@
             
             <button class="btn btn-success">Create Post</button>
         </form>
+    </div>
         <br><br><br><hr> <br><br><br>
 @endsection
     

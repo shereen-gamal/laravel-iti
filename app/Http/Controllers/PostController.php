@@ -37,13 +37,22 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $data = $request->all();
+        $photo_exe = $data['photo']->getClientOriginalExtension();
+
+        if($photo_exe =="png"|| $photo_exe=='jpg'){
+            $fileName = time() . "." . $photo_exe;
+            $path = 'images/posts';
+            $data['photo']->move($path,$fileName);
+        }
         
         
         Post::create([
+            
             'title' => $data['title'],
             'description' => $data['description'],
             'user_id' => $data['post_creator'],
             'slug'=>Str::slug($data['title'],'-'),
+            'photo'=>isset($fileName)?$fileName:NULL,
           
         ]);
         return redirect()->route('posts.index');
