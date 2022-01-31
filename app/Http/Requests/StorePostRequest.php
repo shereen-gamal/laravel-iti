@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 
 class StorePostRequest extends FormRequest
 {
@@ -24,9 +25,16 @@ class StorePostRequest extends FormRequest
      */
     public function rules()
     {
+        $user = new User();
+        $users = $user->all();
+        $ids =[];
+        foreach($users as $item){
+            array_push($ids,$item->id);
+        }
         return [
             'title' => ['required', 'min:3','unique:App\Models\Post,title'],
             'description' => ['required', 'min:10'],
+            'post_creator'=> ['required', Rule::in($ids),]
         ];
     }
 

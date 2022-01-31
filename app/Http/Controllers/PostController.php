@@ -38,6 +38,8 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $data = $request->all();
+        dd($data);
+        
         Post::create([
             'title' => $data['title'],
             'description' => $data['description'],
