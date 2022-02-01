@@ -17,7 +17,7 @@ class PostController extends Controller
     }
 
     public function show ($id){
-        $post = Post::all()->where('id',$id);
+        $post = Post::find($id);
 
         return new PostResource($post) ;
     }
