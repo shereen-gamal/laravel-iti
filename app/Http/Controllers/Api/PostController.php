@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,13 +13,13 @@ class PostController extends Controller
 {
     public function index (){
         $posts = Post ::all();
-        return $posts;
+        return PostResource::collection($posts);
     }
 
     public function show ($id){
         $post = Post::all()->where('id',$id);
 
-        return $post ;
+        return new PostResource($post) ;
     }
     public function store(){
         $data =request()->all();
@@ -31,7 +32,6 @@ class PostController extends Controller
             'photo'=>isset($fileName)?$fileName:NULL,
           
         ]);
-        return $post;
-    }
-    
+        return new PostResource($post);
+    }    
 }
