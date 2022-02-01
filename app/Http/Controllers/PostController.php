@@ -22,6 +22,7 @@ class PostController extends Controller
             // 'allPosts' => $allPosts,
             'allPosts' => $post->paginate(6),
             
+            
         ]);
     }
 

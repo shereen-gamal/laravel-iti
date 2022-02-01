@@ -28,7 +28,7 @@ Route::get('hello', function () {
     ]);
 });
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::delete('/posts/post/{post}',[PostController::class,'destroy'])->name('posts.destroy')->middleware('auth');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')->middleware('auth');
