@@ -19,6 +19,16 @@
 <br>
 <hr>
 <br>
+@if (isset($item->photo))
+<div class="card" style="width: 18rem;">
+  <img src="{{asset('storage/posts/').$item->photo}}" class="card-img-top" alt="photo-from-database">
+</div>
+@endif
+
+<br>
+<hr>
+<br>
+
 <div class="card">
   <div class="card-header">
     Post Creator Info
