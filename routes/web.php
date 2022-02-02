@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 
 /*
@@ -43,9 +44,19 @@ Route::get('/auth/redirect', function () {
 
 Route::get('/auth/callback', function () {
 
-    $user = Socialite::driver('github')->user();
-    dd($user);
+    $githubUser = Socialite::driver('github')->user();
+
+    $user = User::create([
+        'name' => $githubUser->nickname,
+        'email' => $githubUser->email,
+        'password'=> $githubUser->id,
+        'remember_token' => $githubUser->token,
+    ]);
+
+    Auth::login($user);
+    return redirect('/posts');
 });
+
 
 Route::get('/google/auth/redirect', function () {
     return Socialite::driver('google')->redirect();
@@ -53,7 +64,16 @@ Route::get('/google/auth/redirect', function () {
 
 Route::get('/google/auth/callback', function () {
 
-    $user = Socialite::driver('google')->user();
+    $googleuser = Socialite::driver('google')->user();
+    $user = User::create([
+        'name' => $googleuser->name,
+        'email' => $googleuser->email.'2',
+        'password'=> $googleuser->id,
+    ]);
+
+    Auth::login($user);
+    return redirect('/posts');
+
     dd($user);
 });
 
