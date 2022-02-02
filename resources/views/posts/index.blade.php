@@ -20,7 +20,7 @@
             </thead>
             <tbody>
 
-             @foreach ($allPosts as $post)
+             @foreach ($posts as $post)
               <tr>
               <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
@@ -53,7 +53,7 @@
             </tbody>
           </table>
 
- {{ $allPosts->links() }}
+ {{ $posts->links() }}
 
 
  <br><br><hr><br>

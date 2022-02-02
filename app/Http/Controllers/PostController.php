@@ -15,14 +15,10 @@ class PostController extends Controller
 {
     public function index()
     {
-        $post = new Post();
-
+        $egarPost = Post::with('user')->paginate(6);
         $carbon= new Carbon();
         return view('posts.index', [
-            // 'allPosts' => $allPosts,
-            'allPosts' => $post->paginate(6),
-            
-            
+            'posts' =>$egarPost,
         ]);
     }
 
