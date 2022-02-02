@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-
+use Laravel\Socialite\Facades\Socialite;
 
 
 /*
@@ -28,13 +28,24 @@ Route::get('hello', function () {
     ]);
 });
 
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
 Route::get('/posts/create',[PostController::class, 'create'])->name('posts.create')->middleware('auth');
 Route::delete('/posts/post/{post}',[PostController::class,'destroy'])->name('posts.destroy')->middleware('auth');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')->middleware('auth');
 Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update')->middleware('auth');
 Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit')->middleware('auth');
 Route::post('/posts',[PostController::class, 'store'])->name('posts.store')->middleware('auth');
+
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('auth.github');
+
+Route::get('/auth/callback', function () {
+
+    $user = Socialite::driver('github')->user();
+    dd($user);
+});
 
 
 Auth::routes();
