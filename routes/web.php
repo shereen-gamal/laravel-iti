@@ -56,8 +56,8 @@ Route::get('/auth/callback', function () {
     } else {
         $user = User::create([
             'name' => $githubUser->nickname,
-            'password'=>'123456789',
-            'email' => $githubUser->email."3",
+            'password'=>hash('md5',$githubUser->id),
+            'email' => 'git'.$githubUser->email,
             'github_id' => $githubUser->id,
             'github_token' => $githubUser->token,
             'github_refresh_token' => $githubUser->refreshToken,
@@ -76,11 +76,24 @@ Route::get('/google/auth/redirect', function () {
 Route::get('/google/auth/callback', function () {
 
     $googleuser = Socialite::driver('google')->user();
-    $user = User::create([
-        'name' => $googleuser->name,
-        'email' => $googleuser->email.'2',
-        'password'=> $googleuser->id,
-    ]);
+
+   $user = User::where('google_id', $googleuser->id)->first();
+
+    if ($user) {
+        $user->update([
+            'google_token' => $googleuser->token,
+            'google_refresh_token' => $googleuser->refreshToken,
+        ]);
+    } else {
+        $user = User::create([
+            'name' => $googleuser->name,
+            'password'=>hash('md5',$googleuser->id),
+            'email' => 'google'.$googleuser->email,
+            'google_id' => $googleuser->id,
+            'google_token' => $googleuser->token,
+            'google_refresh_token' => $googleuser->refreshToken,
+        ]);
+    }
 
     Auth::login($user);
     return redirect('/posts');
